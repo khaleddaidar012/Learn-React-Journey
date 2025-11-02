@@ -10,6 +10,7 @@ export const Content = () => {
         height: "100vh",
         textAlign: "center",
         paddingTop: "100px",
+        width:"100%",
       }}
     >
       <h1>Current Theme: {theme}</h1>
