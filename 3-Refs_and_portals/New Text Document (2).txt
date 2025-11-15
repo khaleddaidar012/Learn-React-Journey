@@ -1,0 +1,161 @@
+// 🧠 ------------------------------------------------------
+// 🎯 1. الفكرة العامة:
+// useRef() = الأب بيعمل "سلك"
+// forwardRef() = الابن بيفتح مدخل السلك
+// useImperativeHandle() = الابن بيقول للأب إيه المسموحله يتحكم فيه
+// ---------------------------------------------------------
+
+import React, {
+  useRef,
+  useImperativeHandle,
+  forwardRef,
+  useState,
+} from "react";
+
+// 🧩 ------------------------------------------------------
+// 👶 Child Component (الابن)
+// هنا الابن هيسمح للأب يوصلله عن طريق forwardRef
+// ---------------------------------------------------------
+const Child = forwardRef((props, ref) => {
+  // useRef عشان نربط input
+  const inputRef = useRef();
+
+  // useImperativeHandle بيقول للأب إيه اللي يقدر يعمله
+  useImperativeHandle(ref, () => ({
+    // الأب يقدر يستدعي الحاجات دي
+    focusInput: () => inputRef.current.focus(),
+    clearInput: () => (inputRef.current.value = ""),
+  }));
+
+  return (
+    <div>
+      <h3>👶 أنا الابن (Child)</h3>
+      <input ref={inputRef} placeholder="اكتب هنا يا بابا 😄" />
+    </div>
+  );
+});
+
+// 👨 ------------------------------------------------------
+// 🧩 Parent Component (الأب)
+// هنا الأب بيستخدم useRef يعمل "سلك" ويربطه بالابن
+// ---------------------------------------------------------
+export default function Parent() {
+  const childRef = useRef(); // "السلك" بين الأب والابن
+
+  return (
+    <div style={{ fontFamily: "sans-serif", lineHeight: "1.6" }}>
+      <h2>👨 أنا الأب (Parent)</h2>
+      <p>
+        أنا هابعت ref للابن عشان أتحكم في حاجات معينة جواه
+        (زي focus أو clear)
+      </p>
+
+      {/* هنا الأب وصل السلك بالابن */}
+      <Child ref={childRef} />
+
+      <br />
+
+      {/* الأزرار بتتحكم في الابن من برا */}
+      <button onClick={() => childRef.current.focusInput()}>
+        🔍 ركّز على الخانة
+      </button>
+      <button onClick={() => childRef.current.clearInput()}>
+        🧹 امسح الكلام
+      </button>
+    </div>
+  );
+}
+
+// 🧩 ------------------------------------------------------
+// 💬 شرح تخيلي:
+//
+// Parent (الأب)
+//   |
+//   | ← useRef() = بيعمل "سلك"
+//   |
+//   ▼
+// Child (الابن)
+//   |
+//   | ← forwardRef() = بيفتح مدخل للسلك
+//   |
+//   ▼
+// useImperativeHandle() = بيقول للأب "انت مسموحلك تتحكم في دول بس"
+//
+// ------------------------------------------------------
+
+// 🧩 ------------------------------------------------------
+// 📘 أمثلة إضافية بسيطة للفهم
+// ------------------------------------------------------
+
+// ✅ مثال 2: Counter يتحكم فيه الأب
+export function ExampleCounter() {
+  const counterRef = useRef();
+
+  return (
+    <div style={{ marginTop: "40px" }}>
+      <h2>🧮 مثال 2: الأب يتحكم في عداد الابن</h2>
+      <CounterChild ref={counterRef} />
+      <button onClick={() => counterRef.current.increase()}>➕ زود</button>
+      <button onClick={() => counterRef.current.reset()}>🔁 رجّع صفر</button>
+      <button onClick={() => alert(counterRef.current.getValue())}>
+        🔎 شوف القيمة
+      </button>
+    </div>
+  );
+}
+
+const CounterChild = forwardRef((props, ref) => {
+  const [count, setCount] = useState(0);
+
+  useImperativeHandle(ref, () => ({
+    increase: () => setCount((c) => c + 1),
+    reset: () => setCount(0),
+    getValue: () => count,
+  }));
+
+  return (
+    <div>
+      <h3>👶 العداد (Child): {count}</h3>
+    </div>
+  );
+});
+
+// 🧩 ------------------------------------------------------
+// ✅ مثال 3: Modal الأب يفتحها ويقفلها
+// ------------------------------------------------------
+export function ExampleModal() {
+  const modalRef = useRef();
+
+  return (
+    <div style={{ marginTop: "40px" }}>
+      <h2>🪟 مثال 3: تحكم في Modal</h2>
+      <button onClick={() => modalRef.current.open()}>افتح المودال</button>
+      <ModalChild ref={modalRef} />
+    </div>
+  );
+}
+
+const ModalChild = forwardRef((props, ref) => {
+  const [visible, setVisible] = useState(false);
+
+  useImperativeHandle(ref, () => ({
+    open: () => setVisible(true),
+    close: () => setVisible(false),
+  }));
+
+  if (!visible) return null;
+
+  return (
+    <div
+      style={{
+        border: "2px solid black",
+        padding: "10px",
+        width: "200px",
+        marginTop: "10px",
+      }}
+    >
+      <p>📦 ده المودال بتاعي</p>
+      <button onClick={() => setVisible(false)}>❌ اقفل</button>
+    </div>
+  );
+});
