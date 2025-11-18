@@ -245,6 +245,17 @@ function PortalExample4() {
 
 ///////////////////////////////
 
+
+
+
+
+
+
+
+
+
+
+
 // 🌀 مثال 10 (Portals) — تراكب (Overlay) فوق الصفحة
 import { useState } from "react";
 import { createPortal } from "react-dom";

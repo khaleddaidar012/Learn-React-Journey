@@ -1,0 +1,95 @@
+
+Reducer : داله بتقلل قيمه او اكتر الي قيمه اسهل
+[5,10,100] ==> 115
+
+import {useReducer} from 'react'
+
+برا ال copmpnent
+function myshopcardreducer(state, action){
+return state}
+
+
+export defualt function cartcontent({}){
+const [shoppingcaredstate,shoppingcartdispatch] = useReducer(myshopcardreducer, initial state)
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////
+const [count, setCount] = useState(0);
+
+const increment = () => setCount(count + 1);
+const decrement = () => setCount(count - 1);
+
+const [state, dispatch] = useReducer(reducer, initialState);
+
+
+state → الحالة الحالية (زي count في useState)
+
+dispatch → دالة بتبعتها "أوامر" (actions)
+
+reducer → دالة بتستقبل الحالة الحالية والأمر (action)، وتقرر الحالة الجديدة
+
+initialState → الحالة الأولية
+
+////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+example_1
+
+import { useReducer } from "react";
+
+const initialState = { count: 0 };
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "increment":
+      return { count: state.count + 1 };
+    case "decrement":
+      return { count: state.count - 1 };
+    case "reset":
+      return { count: 0 };
+    default:
+      return state;
+  }
+}
+
+export default function CounterApp() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  return (
+    <div style={{ textAlign: "center", padding: "40px" }}>
+      <h1>Count: {state.count}</h1>
+      <button onClick={() => dispatch({ type: "increment" })}>+</button>
+      <button onClick={() => dispatch({ type: "decrement" })}>-</button>
+      <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+    </div>
+  );
+}
+
+

@@ -121,6 +121,16 @@ export const UserApp = () => {
 // 🔵 مشروع 3: Language Context (Multi-language)
 // =======================================================
 
+
+
+
+
+
+
+
+
+
+
 // ---------- Context ----------
 const LangContext = createContext();
 
@@ -139,6 +149,18 @@ export const LangProvider = ({ children }) => {
 
 // ---------- Hook ----------
 export const useLang = () => useContext(LangContext);
+
+
+
+
+
+
+
+
+
+
+
+
 
 // ---------- Component ----------
 export const LangApp = () => {
