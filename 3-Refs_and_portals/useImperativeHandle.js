@@ -120,6 +120,22 @@ const CounterChild = forwardRef((props, ref) => {
   );
 });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // 🧩 ------------------------------------------------------
 // ✅ مثال 3: Modal الأب يفتحها ويقفلها
 // ------------------------------------------------------
@@ -172,10 +188,10 @@ const ModalChild = forwardRef((props, ref) => {
 /*Examples*/
 import React, { useRef, useImperativeHandle, forwardRef, useState } from "react";
 
-// ✅ Example 1 - Basic Counter
+// ✅ Example 1 - Basic Counter الابن
 const Counter = forwardRef((props, ref) => {
   const [count, setCount] = useState(0);
-
+// السماح باشياء معينه للاب
   useImperativeHandle(ref, () => ({
     reset: () => setCount(0),
     increment: () => setCount((c) => c + 1),
@@ -189,13 +205,15 @@ const Counter = forwardRef((props, ref) => {
     </div>
   );
 });
-
+// الاب
 export default function Example1() {
+  //السلك
   const counterRef = useRef();
 
   return (
     <div style={{ marginBottom: "30px" }}>
       <h2>Example 1 - Basic Counter</h2>
+    {/*تركيب السلك في الابن */ }
       <Counter ref={counterRef} />
       <button onClick={() => counterRef.current.reset()}>Reset</button>
       <button onClick={() => alert(counterRef.current.getCount())}>
@@ -204,6 +222,20 @@ export default function Example1() {
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // ✅ Example 2 - Custom Input Focus
 const CustomInput = forwardRef((props, ref) => {
@@ -229,6 +261,11 @@ export function Example2() {
     </div>
   );
 }
+
+
+
+
+
 
 // ✅ Example 3 - Modal Control
 const Modal = forwardRef((props, ref) => {
@@ -259,6 +296,12 @@ export function Example3() {
     </div>
   );
 }
+
+
+
+
+
+
 
 // ✅ Example 4 - Timer Control
 const Timer = forwardRef((props, ref) => {
