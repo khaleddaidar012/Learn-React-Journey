@@ -1,0 +1,24 @@
+1- في تيرمنال تاني 
+2- npm install 
+3-npm start
+4- node app.js في تيرمنال تاني 
+
+
+
+1- 5امثله عن fetch data
+2- 5امثله عن ال sending data with post 
+3- 5 امثله عن ال delete via delete http requests
+4- optimistic updating شرح و 5 امثله
+2- const resposne = await fetch("url ").then( (res) => )
+بس لازم تحول ال كومبونت ال async لو استخدمنا await 
+اما من غيرها 
+fetch("url ").then( (res) =>{
+
+return res.json()
+
+} ).then((resDtat) =>{
+
+resData.mydata ال مكتوبه في الباك اند
+
+setAvalibalePlaces(resData.places)
+})
