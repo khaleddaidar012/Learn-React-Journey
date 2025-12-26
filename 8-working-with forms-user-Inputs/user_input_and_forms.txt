@@ -1,0 +1,97 @@
+1- handling form submission
+
+ازاي تمنع التصرف الاصلي لل form 
+اما عن طريق 
+1- خلي ال زرار نوعه button 
+2- حد  الدله في تاج ال فورم 
+
+وجوا الداله استدعي 
+event.preventDefault();
+ونستدعي جواها بقي ال قيم 
+
+function handleSubmit(e){
+e.preventDefault();
+const enteredemail = email.current.value;
+const enteredpassword = password.current.value;
+console.log(enteredpassword ,enteredemail )
+
+
+}
+ممكن نجيب القيم باستخدما ال useref 
+بس مش افضل حاجه 
+حل اخر 
+
+
+function handleSubmit(e){
+e.preventDefault();
+
+const fd = FormData(e.target);
+لازم كل عنصر استدخال عنه name
+const email = fd.get("email")
+,هكذا 
+ولو عاوز كل العناصر 
+ const data = Object.fromEntries(fd.entires())
+console.log(data)
+بس ال check مش هيكون موجود
+ cont checkbok = fd.getAll("ourcheckbook")
+ data.checkbox =checkbok  
+
+}
+عشان نعمل reset
+event.target.reset()
+
+
+
+
+
+
+
+
+
+
+
+
+<form onSubmit={handleSubmit}>
+
+
+
+
+
+validate input on every keystrok
+
+
+const emailIsInvalid = enterdValues.emails =! "" && !enterdValues.emails.includes("@");
+عشان اتاكد انه دخل بيناتات والرساله متظهرش من الاول كدا
+استخدامه 
+بس فيه مشتلين هما ان الرساله هتظهر مع اول حرف يدخل 
+<div>
+{emailIsInvalid && <p>please enter a valid email address</p>}
+</div>
+
+الحل باذن الله
+
+onBlue and function handle_input_valid
+
+
+بس برضوا فيه مشكله لو عمل بلو برا من غير ما يكتب وييجي يكتب الراسله هتفضل موجوده لغايه لما يكتب الاميل كله
+
+
+
+
+
+
+
+
+
+فيه props قدر اتحقق منها من المدخلات
+htmlbuilt-in form validation
+ابحث وطبق عليهم
+
+انشاء resuble input component
+ 
+ 
+ مكتبات تساعد في عمليه التحقق باذن الله
+ 
+ react form liberaries
+ react form hook
+ formik

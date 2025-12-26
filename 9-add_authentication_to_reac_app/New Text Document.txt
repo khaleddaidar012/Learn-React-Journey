@@ -1,0 +1,14 @@
+how authenticaton work
+
+عشان نعمل مصادقه اما نستخدم 
+server side session --> مناسب لل fullstack apps
+or
+authentication tokens
+
+
+working with query parameters
+any thing after ? in the url
+10 امثله عن useSearhcParams مع <Link></Link>
+10 امثله عن ال auth action impelementation
+  
+
